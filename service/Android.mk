@@ -66,7 +66,8 @@ LIB_WIFI_HAL := libwifi-hal
 ifeq ($(BOARD_WLAN_DEVICE), bcmdhd)
   LIB_WIFI_HAL := libwifi-hal-bcm
 else ifeq ($(BOARD_WLAN_DEVICE), qcwcn)
-  LIB_WIFI_HAL := libwifi-hal-qcom
+  # b8080f: keep the generic wifi HAL: Qualcomm's wifi_hal sends nl80211 vendor commands at start-up, which
+  # oops the stock 3.4 kernel (NULL deref in nl80211_vendor_cmd). Basic Wi-Fi does not need it.
 else ifeq ($(BOARD_WLAN_DEVICE), mrvl)
   # this is commented because none of the nexus devices
   # that sport Marvell's wifi have support for HAL
